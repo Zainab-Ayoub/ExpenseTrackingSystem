@@ -2,7 +2,20 @@
 using namespace std;
 
 struct Expense{
+    int id;
+    float amount;
+    string description;
+    string date;
+    Expense* next;
+    static int idCounter;
 
+    Expense(float amt, string desc, string dt){
+        amt = amount;
+        desc = description;
+        date = dt;
+        next = nullptr;
+        id = idCounter++;
+    }
 };
 
 struct Category{
@@ -42,7 +55,7 @@ void showAllCategories(){
 }
 
 void cleanup(){
-    
+
 }
 
 int main(){
