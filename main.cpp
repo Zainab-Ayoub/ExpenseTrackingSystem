@@ -17,6 +17,7 @@ struct Expense{
         id = idCounter++;
     }
 };
+int Expense::idCounter = 0;
 
 struct Category{
 
