@@ -20,7 +20,16 @@ struct Expense{
 int Expense::idCounter = 0;
 
 struct Category{
+    string name;
+    float totalSpent = 0;
+    Expense* expenses;
+    Category* next;
 
+    Category(string n){
+        n = name;
+        expenses = nullptr;
+        next = nullptr;
+    }
 };
 
 Category* findCategory(Category* head, string name){
