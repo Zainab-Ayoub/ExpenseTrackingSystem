@@ -33,7 +33,13 @@ struct Category{
 };
 
 Category* findCategory(Category* head, string name){
-
+    while(head){
+        if(head->name == name){
+            return head;
+        }
+        head = head->next;    
+    }
+    return nullptr;
 }
 
 void addCategory(){
