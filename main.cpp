@@ -169,8 +169,18 @@ void showAllCategories(Category* head){
     }
 }
 
-void cleanup(){
-
+void cleanup(Category* head){
+    while(head){
+        Expense* expenseNode = head->expenses;
+        while(expenseNode){
+            Expense* temp = expenseNode;
+            expenseNode = expenseNode->next;
+            delete temp;
+        }
+        Category* temp = head;
+        head = head->next;
+        delete temp;
+    }
 }
 
 int main(){
