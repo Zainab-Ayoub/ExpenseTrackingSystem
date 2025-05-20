@@ -42,15 +42,31 @@ Category* findCategory(Category* head, string name){
     return nullptr;
 }
 
-void addCategory(){
-
+void addCategory(Category* head, string name){
+    if(findCategory(head, name)){
+        cout<<"Category already exists.\n";
+        return;
+    } 
+    Category* newnode = new Category(name);
+    newnode->next = head;
+    head = newnode;
+    cout<<"Category Added!\n";
 }
 
-void addExpense(){
-
+void addExpense(Category* head, string categoryName, float amount, string description, string date){
+    Category* categoryNode = findCategory(head, categoryName);
+    if(!categoryNode){
+        cout<<"Category not found!\n";
+        return;
+    } 
+    Expense* expenseNode = new Expense(amount, description, date);
+    expenseNode->next = categoryNode->expenses;
+    categoryNode->expenses = expenseNode;
+    categoryNode->totalSpent += amount;
+    cout<<"Expense added.\n";
 }
 
-void viewExpense(){
+void viewExpenses(){
 
 }
 
