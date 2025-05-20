@@ -184,5 +184,43 @@ void cleanup(Category* head){
 }
 
 int main(){
+    Category* categories = nullptr;
+    int choice;
+    do{
+        cout<<"\n--- Expense Tracker ---\n";
+        cout<<"1. Add Category\n2. Add Expense\n3. View Expenses\n4. Update Expense\n5. Delete Expense\n6. Most Expensive Expense\n7. Show All Categories\n0. Exit\nEnter Choice: ";
+        cin>>choice;
 
+        cin.ignore();
+
+        string name, description, date;
+        float amount;
+        int id;
+
+        switch(choice){
+            case 1:
+                cout<<"Category Name: ";
+                getline(cin, name);
+                
+                addCategory(categories, name);
+                break;
+
+            case 2:
+                cout<<"Category: ";
+                getline(cin, name);
+
+                cout<<"Amount: ";
+                cin>>amount;
+                cin.ignore();
+
+                cout<<"Description: ";
+                getline(cin, description);
+
+                cout<<"Date: ";
+                getline(cin, date);
+
+                addExpense(categories, name, amount, description, date);
+                break;    
+        }
+    }
 }
