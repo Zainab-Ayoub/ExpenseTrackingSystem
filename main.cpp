@@ -162,8 +162,11 @@ void mostExpensiveExpense(Category* head){
     }
 }
 
-void showAllCategories(){
-
+void showAllCategories(Category* head){
+    while(head){
+        cout<<"- "<<head->name<<" ($"<<head->totalSpent<<")\n";
+        head = head->next;
+    }
 }
 
 void cleanup(){
