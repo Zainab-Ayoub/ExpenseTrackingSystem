@@ -66,8 +66,23 @@ void addExpense(Category* head, string categoryName, float amount, string descri
     cout<<"Expense added.\n";
 }
 
-void viewExpenses(){
-
+void viewExpenses(Category* head, string categoryName){
+    Category* categoryNode = findCategory(head, categoryName);
+    if(!categoryNode){
+        cout<<"Category not found!\n";
+    }
+    Expense* expenseNode = categoryNode->expenses;
+    if(!expenseNode){
+        cout<<"No expenses.\n";
+    }
+    while(expenseNode){
+        cout<<"[ID: "<<expenseNode->id
+            <<"] $"<<expenseNode->amount
+            <<" - "<<expenseNode->description
+            <<" ("<<expenseNode->date<<")\n";
+        expenseNode = expenseNode->next;    
+    }
+    cout<<"Total spent in "<<categoryName<<": $"<<categoryNode->totalSpent<<endl;
 }
 
 void updateExpense(){
