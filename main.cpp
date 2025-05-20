@@ -85,16 +85,81 @@ void viewExpenses(Category* head, string categoryName){
     cout<<"Total spent in "<<categoryName<<": $"<<categoryNode->totalSpent<<endl;
 }
 
-void updateExpense(){
+void updateExpense(Category* head, int id){
+    while(head){
+        Expense* expenseNode = head->expenses;
+        while(expenseNode){
+            if(expenseNode->id == id){
+                float newAmount;
+                cout<<"New Amount: ";
+                cin>>newAmount;
+                cin.ignore();
+              
+                string newDescription;
+                cout<<"New Description: ";
+                getline(cin,newDescription);
 
+                string newDate;
+                cout<<"New Date: ";
+                getline(cin,newDate);
+
+                head->totalSpent -= expenseNode->amount;
+                expenseNode->amount = newAmount;
+                expenseNode->description = newDescription;
+                expenseNode->date = newDate;
+                head->totalSpent += newAmount;
+
+                cout<<"Expense updated.\n";
+                return;
+            }
+            expenseNode = expenseNode->next;
+        }
+        head = head->next;
+    }
+    cout<<"Expense not found!\n";
 }
 
-void deleteExpense(){
-
+void deleteExpense(Category* head, int id){
+    while(head){
+        Expense* prev = nullptr;
+        Expense* curr = head->expenses;
+        while(curr){
+            if (curr->id == id){
+                if(prev){
+                    prev->next = curr->next;
+                } else{
+                    head->expenses = curr->next;
+                }
+                head->totalSpent -= curr->amount;
+                delete curr;
+                
+                cout<<"Expense deleted.\n";
+                return;
+            }
+            prev = curr;
+            curr = curr->next;
+        } 
+        head = head->next;
+    }
+    cout<<"Expense not found.\n";
 }
 
-void mostExpensiveExpense(){
-
+void mostExpensiveExpense(Category* head){
+    Expense* mostExp = nullptr;
+    while(head){
+        Expense* expenseNode = head->expenses;
+        while(expenseNode){
+            if(!mostExp || expenseNode->amount > mostExp->amount){
+                mostExp = expenseNode;
+            }   expenseNode = expenseNode->next;
+        }
+        head = head->next;
+    }
+    if(mostExp){
+        cout<<"Most expensive: [ID: "<<mostExp->id<<"] $"<<mostExp->amount<<" - "<<mostExp->description<<" ("<<mostExp->date<<")\n";
+    } else{
+        cout<<"No expenses found.\n";
+    }
 }
 
 void showAllCategories(){
