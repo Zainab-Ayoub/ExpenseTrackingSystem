@@ -201,7 +201,7 @@ int main(){
             case 1:
                 cout<<"Category Name: ";
                 getline(cin, name);
-                
+
                 addCategory(categories, name);
                 break;
 
@@ -221,6 +221,39 @@ int main(){
 
                 addExpense(categories, name, amount, description, date);
                 break;    
+
+            case 3:
+                cout<<"Category: ";
+                getline(cin, name);
+
+                viewExpenses(categories, name);
+                break;
+
+            case 4:
+                cout<<"Expense ID to Update: ";
+                cin>>id;
+                cin.ignore();
+
+                updateExpense(categories, id);
+                break;
+
+            case 5:
+                cout<<"Expense ID to Delete: ";
+                cin>>id;
+                cin.ignore();
+
+                deleteExpense(categories, id);
+                break;  
+
+            case 6:
+                mostExpensiveExpense(categories);
+                break;
+
+            case 7:
+                showAllCategories(categories);
+                break;
         }
-    }
+    } while(choice != 0);
+
+    cleanup(categories);
 }
